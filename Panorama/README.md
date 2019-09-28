@@ -1,5 +1,7 @@
 # Multi-Image Panorama Creation
 
+![Result](examples/result.jpg)
+
 ## Why?
 
 Sometimes the scenes what you want to capture are much larger than the camera you have.
@@ -49,14 +51,14 @@ Then we stitch them all together!
 
 
 ## Other examples / results:
-#### Building example [[source]](https://towardsdatascience.com/image-stitching-using-opencv-817779c86a83)
+#### Building [[source]](https://towardsdatascience.com/image-stitching-using-opencv-817779c86a83)
 ![Building](examples/result2.jpg)
 
-#### Hill example [[source]](https://github.com/daeyun/Image-Stitching/tree/master/img/hill)
+#### Hills [[source]](https://github.com/daeyun/Image-Stitching/tree/master/img/hill)
 ![Hill](examples/result3.jpg)
 
-#### Street example [[source]](http://study.marearts.com/2013/11/opencv-stitching-example-stitcher-class.html)
+#### Street [[source]](http://study.marearts.com/2013/11/opencv-stitching-example-stitcher-class.html)
 ![Street](examples/result4.jpg)
 
-* Flower example [[source]](https://github.com/ppwwyyxx/OpenPano/releases/tag/0.1)
+#### Flower [[source]](https://github.com/ppwwyyxx/OpenPano/releases/tag/0.1)
 ![Flower](examples/result5.jpg)

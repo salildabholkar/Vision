@@ -3,6 +3,27 @@ import numpy as np
 import glob
 
 
+# Finds matching points via SIFT and BFMatcher
+def find_matches(img1, img2):
+    sift = cv2.xfeatures2d.SIFT_create()
+
+    kp1, des1 = sift.detectAndCompute(img1, None)
+    kp2, des2 = sift.detectAndCompute(img2, None)
+
+    match = cv2.BFMatcher(crossCheck=True)
+    matches = match.match(des1, des2)
+    good = sorted(matches, key=lambda x: x.distance)[:100]  # Pick top 100
+
+    draw_params = dict(matchColor=(0, 255, 0),
+                       singlePointColor=None,
+                       flags=2)
+
+    img3 = cv2.drawMatches(img1, kp1, img2, kp2, good, None, **draw_params)
+    # cv2.imwrite('draw{}.jpg'.format(index), img3)
+
+    return kp1, kp2, good
+
+
 def image_stitch():
     all_images = []
     all_images.extend(glob.glob('images/' + '*.jpg'))
@@ -16,21 +37,8 @@ def image_stitch():
         img1 = result
         img2 = cv2.imread(all_images[index])
 
-        sift = cv2.xfeatures2d.SIFT_create()
         # find key points
-        kp1, des1 = sift.detectAndCompute(img1, None)
-        kp2, des2 = sift.detectAndCompute(img2, None)
-
-        match = cv2.BFMatcher(crossCheck=True)
-        matches = match.match(des1, des2)
-        good = sorted(matches, key=lambda x: x.distance)[:100]
-
-        draw_params = dict(matchColor=(0, 255, 0),
-                           singlePointColor=None,
-                           flags=2)
-
-        img3 = cv2.drawMatches(img1, kp1, img2, kp2, good, None, **draw_params)
-        cv2.imwrite('draw{}.jpg'.format(index), img3)
+        kp1, kp2, good = find_matches(img1, img2)
 
         if len(good) < 40:
             print("Not enough matches found: ", len(good))
@@ -46,7 +54,7 @@ def image_stitch():
 
         pts1 = np.float32([[0, 0], [0, h], [w, h], [w, 0]]).reshape(-1, 1, 2)
         pts2 = np.float32([[0, 0], [0, h2], [w2, h2], [w2, 0]]).reshape(-1, 1, 2)
-        pts1 = cv2.perspectiveTransform(pts1, M)
+        pts2 = cv2.perspectiveTransform(pts1, M)
 
         pts = np.concatenate((pts1, pts2), axis=0)
 
