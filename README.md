@@ -2,7 +2,7 @@
 Computer Vision related projects I have worked on
 
 ## Current projects:
-* [Multi-image panorama creation](Multi-image%20stitching) - Creating a panorama from individual images using SIFT
+* [Multi-image panorama creation](Panorama) - Creating a panorama from individual images using SIFT
 ## Running these projects
 
 ### General Requirements
@@ -21,3 +21,4 @@ The individual project directories may have specific instructions on how to run 
 
 ## See also
 [Machine Learning algorithms](https://github.com/salildabholkar/Machine-Learning)
+[Deep Learning algorithms](https://github.com/salildabholkar/Deep-Learning)
