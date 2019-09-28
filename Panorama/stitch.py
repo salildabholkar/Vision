@@ -6,13 +6,14 @@ import glob
 def image_stitch():
     all_images = []
     all_images.extend(glob.glob('images/' + '*.jpg'))
+    all_images.sort()
 
-    dst = cv2.imread(all_images[0])
+    result = cv2.imread(all_images[0])
     for index, image in enumerate(all_images):
         if index is 0:
             continue
 
-        img1 = dst
+        img1 = result
         img2 = cv2.imread(all_images[index])
 
         sift = cv2.xfeatures2d.SIFT_create()
@@ -22,7 +23,7 @@ def image_stitch():
 
         match = cv2.BFMatcher(crossCheck=True)
         matches = match.match(des1, des2)
-        good = sorted(matches, key=lambda x: x.distance)[:40]
+        good = sorted(matches, key=lambda x: x.distance)[:100]
 
         draw_params = dict(matchColor=(0, 255, 0),
                            singlePointColor=None,
@@ -31,7 +32,7 @@ def image_stitch():
         img3 = cv2.drawMatches(img1, kp1, img2, kp2, good, None, **draw_params)
         cv2.imwrite('draw{}.jpg'.format(index), img3)
 
-        if len(good) < 10:
+        if len(good) < 40:
             print("Not enough matches found: ", len(good))
             return
 
@@ -45,9 +46,9 @@ def image_stitch():
 
         pts1 = np.float32([[0, 0], [0, h], [w, h], [w, 0]]).reshape(-1, 1, 2)
         pts2 = np.float32([[0, 0], [0, h2], [w2, h2], [w2, 0]]).reshape(-1, 1, 2)
-        pts2_ = cv2.perspectiveTransform(pts2, M)
+        pts1 = cv2.perspectiveTransform(pts1, M)
 
-        pts = np.concatenate((pts1, pts2_), axis=0)
+        pts = np.concatenate((pts1, pts2), axis=0)
 
         [xmin, ymin] = np.int32(pts.min(axis=0).ravel() - 0.5)
         [xmax, ymax] = np.int32(pts.max(axis=0).ravel() + 0.5)
@@ -58,10 +59,10 @@ def image_stitch():
         # img2 = cv2.polylines(img2, [np.int32(cv2.perspectiveTransform(pts, M))], True, 255, 3, cv2.LINE_AA)
         # cv2.imshow('poly', img2)
 
-        dst = cv2.warpPerspective(img1, Ht.dot(M), (xmax - xmin, ymax - ymin))
-        dst[t[1]:h + t[1], t[0]:w + t[0]] = img2
+        result = cv2.warpPerspective(img1, Ht.dot(M), (xmax - xmin, ymax - ymin))
+        result[t[1]:h + t[1], t[0]:w + t[0]] = img2
 
-    # cv2.imwrite('result.jpg', dst)
+    cv2.imwrite('result.jpg', result)
     # cv2.waitKey(0)
 
 

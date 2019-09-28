@@ -48,3 +48,15 @@ Then we stitch them all together!
 ![Result](examples/result.jpg)
 
 
+## Other examples / results:
+#### Building example [[source]](https://towardsdatascience.com/image-stitching-using-opencv-817779c86a83)
+![Building](examples/result2.jpg)
+
+#### Hill example [[source]](https://github.com/daeyun/Image-Stitching/tree/master/img/hill)
+![Hill](examples/result3.jpg)
+
+#### Street example [[source]](http://study.marearts.com/2013/11/opencv-stitching-example-stitcher-class.html)
+![Street](examples/result4.jpg)
+
+* Flower example [[source]](https://github.com/ppwwyyxx/OpenPano/releases/tag/0.1)
+![Flower](examples/result5.jpg)
