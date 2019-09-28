@@ -3,6 +3,9 @@ Computer Vision related projects I have worked on
 
 ## Current projects:
 * [Multi-image panorama creation](Panorama) - Creating a panorama from individual images using SIFT
+* [German Traffic Sign Classifier](Traffic%20Sign%20Classifier/Traffic_Sign_Classifier.ipynb) - Used a deep CNN to identify traffic signs
+
+
 ## Running these projects
 
 ### General Requirements
