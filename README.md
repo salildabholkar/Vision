@@ -23,5 +23,5 @@ Make sure `python 3` is being used by doing `python --version`
 The individual project directories may have specific instructions on how to run them
 
 ## See also
-[Machine Learning algorithms](https://github.com/salildabholkar/Machine-Learning)
-[Deep Learning algorithms](https://github.com/salildabholkar/Deep-Learning)
+* [Machine Learning algorithms](https://github.com/salildabholkar/Machine-Learning)
+* [Deep Learning algorithms](https://github.com/salildabholkar/Deep-Learning)
